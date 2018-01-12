@@ -49,25 +49,7 @@ import java.util.Map;
 public class PerfectX extends Configured implements Tool {
   private static final Logger LOG = Logger.getLogger(PerfectX.class);
 
-  // Mapper: emits (token, 1) for every word occurrence.
   public static final class MyMapper extends Mapper<LongWritable, Text, Text, IntWritable> {
-    // Reuse objects to save overhead of object creation.
-    private static final IntWritable ONE = new IntWritable(1);
-    private static final Text WORD = new Text();
-
-    @Override
-    public void map(LongWritable key, Text value, Context context)
-        throws IOException, InterruptedException {
-      for (String word : Tokenizer.tokenize(value.toString())) {
-        if (word.equals("perfect")){
-          WORD.set(word);
-          context.write(WORD, ONE);
-        }
-      }
-    }
-  }
-
-  public static final class MyMapperIMC extends Mapper<LongWritable, Text, Text, IntWritable> {
     private Map<String, Integer> counts;
 
     @Override
@@ -78,15 +60,20 @@ public class PerfectX extends Configured implements Tool {
     @Override
     public void map(LongWritable key, Text value, Context context)
         throws IOException, InterruptedException {
-      for (String word : Tokenizer.tokenize(value.toString())) {
-        if (word.equals("perfect")){
-          if (counts.containsKey(word)) {
-            counts.put(word, counts.get(word)+1);
-          } else {
-            counts.put(word, 1);
-          }
+        String curr = null;
+        for(String next: Tokenizer.tokenize(value.toString())) {
+            if (curr != null) {
+                if (curr.equals("perfect")){
+                  // System.out.println(next);
+                  if (counts.containsKey(next)) {
+                    counts.put(next, counts.get(next)+1);
+                  } else {
+                    counts.put(next, 1);
+                  }
+                }
+            }
+            curr = next;
         }
-      }
     }
 
     @Override
@@ -137,9 +124,6 @@ public class PerfectX extends Configured implements Tool {
 
     @Option(name = "-reducers", metaVar = "[num]", usage = "number of reducers")
     int numReducers = 1;
-
-    @Option(name = "-imc", usage = "use in-mapper combining")
-    boolean imc = false;
   }
 
   /**
@@ -162,7 +146,6 @@ public class PerfectX extends Configured implements Tool {
     LOG.info(" - input path: " + args.input);
     LOG.info(" - output path: " + args.output);
     LOG.info(" - number of reducers: " + args.numReducers);
-    LOG.info(" - use in-mapper combining: " + args.imc);
 
     Configuration conf = getConf();
     Job job = Job.getInstance(conf);
@@ -180,7 +163,7 @@ public class PerfectX extends Configured implements Tool {
     job.setOutputValueClass(IntWritable.class);
     job.setOutputFormatClass(TextOutputFormat.class);
 
-    job.setMapperClass(args.imc ? MyMapperIMC.class : MyMapper.class);
+    job.setMapperClass(MyMapper.class);
     job.setCombinerClass(MyReducer.class);
     job.setReducerClass(MyReducer.class);
 
