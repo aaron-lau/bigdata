@@ -1,5 +1,34 @@
-# q1
+Tested on local machine and student environment (ubuntu1604-006)
 
+# q1
+The PairsPMI consist of 3 map reduce jobs. The first map reduce job takes input from the input
+file and counts the number of lines which is necessary for PMI calculation. The line count is then written to a file
+in a lineCount directory. The second map reduce job takes input from the input file and
+obtains occurrences and cooccurrence of words for each event.
+These numbers are also required for PMI calculations and are placed in an
+intermediate directory. The third map reduce job takes input from the second map reduce jobs.
+The third mapper will simply convert <PairsOfStrings, FloatWritable> key value pairs outputted from the second mapper to
+<PairsOfStrings, PairOfFloatInt>. The float is initialized to be 0.0 and will be used to calculate
+PMI in the reduce step. The Int is the co-occurrence count that was already calculated from
+the second mapper. The PairOfStrings is the two words we are calculating the PMI and co-occurrence
+for. The reducer will read the side data stored in lineCount and intermediate directories
+in the reducer setup. After parsing the side data the reduce step simply performs the PMI calculation and will then write a
+<PairsOfStrings, PairOfFloatInt> to the context.
+
+The StripesPMI is quite similar to the PairsPMI. Again there are three map reduce jobs. The first two map reduce jobs
+do exactly the same thing but the second map reduce job will only output occurrences and not co-occurrences.
+The third map reduce job will take input from the input file. The mapper will emit a key value
+pair where the key is a word (e.g., A) and the value is a map, where each of the keys is a
+co-occurring word (e.g., B), and the value is an integer 1 corresponding to the co-occurrence
+count. The combiner will then combine all the key/value pairs where the map in the value have
+the same key. The setup in the combiner is similar to PairsPMI where it parsers and stores the
+side data outputted in the first two map reduce jobs. Using the co-occurrence obtained in the
+third map reduce and the line count and occurrence count obtained from the side data, the reduce
+job will calculate the PMI and output a <Text, Text> key/value pair. The key is a word (e.g., A)
+and the value is a map where the key is a co-occurring work (e.g., B) and the value is a pair
+of PMI and co-occurrence value (e.g., 'A	B: (PMI, CO-OCCURRENCE)'). The output is in the form
+of Text because I was unable to find a hashmap writable with a string writable key and a pair
+writable value. 
 
 # q2
 Pairs: 65.211 seconds
