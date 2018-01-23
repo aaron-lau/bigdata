@@ -352,7 +352,7 @@ public class PairsPMI extends Configured implements Tool {
     lineCountJob.setOutputFormatClass(TextOutputFormat.class);
 
     lineCountJob.setMapperClass(LineCountMapper.class);
-    lineCountJob.setCombinerClass(LineCountReducer.class);
+    // lineCountJob.setCombinerClass(LineCountReducer.class);
     lineCountJob.setReducerClass(LineCountReducer.class);
 
     long lineCountJobStartTime = System.currentTimeMillis();
@@ -380,7 +380,7 @@ public class PairsPMI extends Configured implements Tool {
     job1.setOutputFormatClass(TextOutputFormat.class);
 
     job1.setMapperClass(MyMapper1.class);
-    job1.setCombinerClass(MyReducer1.class);
+    // job1.setCombinerClass(MyReducer1.class);
     job1.setReducerClass(MyReducer1.class);
     job1.setPartitionerClass(MyPartitioner1.class);
 
@@ -408,7 +408,7 @@ public class PairsPMI extends Configured implements Tool {
     job2.setOutputValueClass(PairOfFloatInt.class);
 
     job2.setMapperClass(MyMapper2.class);
-    job2.setCombinerClass(MyCombiner2.class);
+    // job2.setCombinerClass(MyCombiner2.class);
     job2.setReducerClass(MyReducer2.class);
     job2.setPartitionerClass(MyPartitioner2.class);
 
@@ -418,7 +418,7 @@ public class PairsPMI extends Configured implements Tool {
 
     long job2StartTime = System.currentTimeMillis();
     job2.waitForCompletion(true);
-    LOG.info("Job2 Finished in " + (System.currentTimeMillis() - job2StartTime) / 1000.0 + " seconds");
+    LOG.info("Job2 Finished in " + (System.currentTimeMillis() - lineCountJobStartTime) / 1000.0 + " seconds");
 
 
     return 0;
