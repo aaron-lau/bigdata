@@ -76,9 +76,9 @@ object ComputeBigramRelativeFrequencyStripes extends Tokenizer {
           // make a mutable object so we can calculate total occurrence
           var mappingMutable = scala.collection.mutable.Map(coccurrenceMapping._2.toSeq: _*)
           // iterate the mutable object to add all the mappings to totalCount
-          mappingMutable.foreach {case(key,value) => {totalCount = totalCount + value}}
+          mappingMutable.foreach {case(key,value) => {totalCount = totalCount + value.toFloat}}
           // calculate the relativeFrequency for each map in the mutable object
-          var relativeFrequency = mappingMutable.map {case(key,value) => (key, value/totalCount)}
+          var relativeFrequency = mappingMutable.map {case(key,value) => (key, value.toFloat/totalCount)}
           (coccurrenceMapping._1, relativeFrequency)
         })
       }
