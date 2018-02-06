@@ -138,7 +138,6 @@ public class BuildInvertedIndexCompressed extends Configured implements Tool {
       }
 
       Iterator<VIntWritable> iter = values.iterator();
-      //reduce   append
       int df = 0;
       while (iter.hasNext()) {
         df = df + iter.next().get();
