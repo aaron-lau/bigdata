@@ -28,7 +28,7 @@ job will calculate the PMI and output a <Text, Text> key/value pair. The key is 
 and the value is a map where the key is a co-occurring work (e.g., B) and the value is a pair
 of PMI and co-occurrence value (e.g., 'A	B: (PMI, CO-OCCURRENCE)'). The output is in the form
 of Text because I was unable to find a hashmap writable with a string writable key and a pair
-writable value. 
+writable value.
 
 # q2
 Pairs: 65.211 seconds
@@ -68,3 +68,23 @@ Their respective cooccurrence is the second number in the second parenthesis
 (death, father's)	(-0.08386797, 21)
 (death, life)	(-0.4659854, 31)
 (death, after)	(-0.64235836, 10)
+
+# q7
+The following the the fair pairs with the highest PMI with the word 'hockey'
+Their respective PMI is the first number in the second parenthesis
+Their respective cooccurrence is the second number in the second parenthesis
+hockey	winger: (2.3863757, 185)
+hockey	defenceman: (2.2691333, 108)
+hockey	ice: (2.1059084, 1630)
+hockey	goaltender: (2.0803165, 136)
+hockey	nhl: (1.9864639, 940)
+
+# q8
+The following the the fair pairs with the highest PMI with the word 'hockey'
+Their respective PMI is the first number in the second parenthesis
+Their respective cooccurrence is the second number in the second parenthesis
+data	storage: (1.9796829, 100)
+data	stored: (1.7868549, 65)
+data	database: (1.7758231, 73)
+data	disk: (1.7383235, 59)
+data	processing: (1.6476576, 57)
