@@ -163,7 +163,7 @@ public class PairsPMI extends Configured implements Tool {
 
           String pairStr = stringCountPair.substring(stringCountPair.indexOf("(") + 1, stringCountPair.indexOf(")"));
 
-          float count = Float.parseFloat(stringCountPair.substring(stringCountPair.lastIndexOf(" ")).replaceAll("\\s+", ""));
+          float count = Float.parseFloat(stringCountPair.substring(stringCountPair.lastIndexOf(")")).replaceAll("\\s+", ""));
 
           String[] pair = pairStr.split(",");
           BIGRAM.set(pair[0].replaceAll("\\s+", ""),pair[1].replaceAll("\\s+", ""));
