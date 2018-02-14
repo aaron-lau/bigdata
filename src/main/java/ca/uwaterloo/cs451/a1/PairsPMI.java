@@ -426,11 +426,11 @@ public class PairsPMI extends Configured implements Tool {
     job2.setPartitionerClass(MyPartitioner2.class);
 
     // Altiscale requirements
-    // job2.getConfiguration().setInt("mapred.max.split.size", 1024 * 1024 * 32);
-    // job2.getConfiguration().set("mapreduce.map.memory.mb", "3072");
-    // job2.getConfiguration().set("mapreduce.map.java.opts", "-Xmx3072m");
-    // job2.getConfiguration().set("mapreduce.reduce.memory.mb", "3072");
-    // job2.getConfiguration().set("mapreduce.reduce.java.opts", "-Xmx3072m");
+    job2.getConfiguration().setInt("mapred.max.split.size", 1024 * 1024 * 32);
+    job2.getConfiguration().set("mapreduce.map.memory.mb", "6144");
+    job2.getConfiguration().set("mapreduce.map.java.opts", "-Xmx6144m");
+    job2.getConfiguration().set("mapreduce.reduce.memory.mb", "6144");
+    job2.getConfiguration().set("mapreduce.reduce.java.opts", "-Xmx6144m");
 
     // Delete the output directory if it exists already.
     Path outputDir = new Path(args.output);
