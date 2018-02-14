@@ -202,8 +202,8 @@ public class PairsPMI extends Configured implements Tool {
     private int threshold = 0;
     private int numLines = 0;
     private static Map<String, Integer> occurrence = new HashMap<String, Integer>();
-    private static Map<String, Integer> cooccurrence = new HashMap<String, Integer>();
-    private static PairOfFloatInt PMIandCOUNT = new PairOfFloatInt();
+    // private static Map<String, Integer> cooccurrence = new HashMap<String, Integer>();
+    // private static PairOfFloatInt PMIandCOUNT = new PairOfFloatInt();
 
     @Override
     public void setup(Context context) {
@@ -236,8 +236,8 @@ public class PairsPMI extends Configured implements Tool {
           String pairStr = line.substring(line.indexOf("(") + 1, line.lastIndexOf(")"));
           float count = Float.parseFloat(line.substring(line.lastIndexOf(")") + 1).replaceAll("\\s+", ""));
           String[] pair = pairStr.split(",");
-          String A = pair[0].replaceAll("\\s+", "");
-          String B = pair[1].replaceAll("\\s+", "");
+          String A = pair[0];
+          String B = pair[1];
 
           if (B.equals("")){
             if (occurrence.containsKey(A)) {
@@ -245,13 +245,13 @@ public class PairsPMI extends Configured implements Tool {
             } else {
               occurrence.put(A, (int)count);
             }
-          } else {
-            if (cooccurrence.containsKey(A + " " + B)) {
-              cooccurrence.put(A+" "+B, cooccurrence.get(A + " " + B)+(int)count);
-            } else {
-              cooccurrence.put(A+" "+B, (int)count);
-            }
-          }
+          }// } else {
+          //   if (cooccurrence.containsKey(A + " " + B)) {
+          //     cooccurrence.put(A+" "+B, cooccurrence.get(A + " " + B)+(int)count);
+          //   } else {
+          //     cooccurrence.put(A+" "+B, (int)count);
+          //   }
+          // }
           line = reader.readLine();
         }
         reader.close();
