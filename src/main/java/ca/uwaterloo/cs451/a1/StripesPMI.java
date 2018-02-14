@@ -341,6 +341,13 @@ public class StripesPMI extends Configured implements Tool {
     // lineCountJob.setCombinerClass(LineCountReducer.class);
     lineCountJob.setReducerClass(LineCountReducer.class);
 
+    // Altiscale requirements
+    lineCountJob.getConfiguration().setInt("mapred.max.split.size", 1024 * 1024 * 32);
+    lineCountJob.getConfiguration().set("mapreduce.map.memory.mb", "3072");
+    lineCountJob.getConfiguration().set("mapreduce.map.java.opts", "-Xmx3072m");
+    lineCountJob.getConfiguration().set("mapreduce.reduce.memory.mb", "3072");
+    lineCountJob.getConfiguration().set("mapreduce.reduce.java.opts", "-Xmx3072m");
+
     long lineCountJobStartTime = System.currentTimeMillis();
     lineCountJob.waitForCompletion(true);
     LOG.info("Line Count Job Finished in " + (System.currentTimeMillis() - lineCountJobStartTime) / 1000.0 + " seconds");
@@ -369,6 +376,12 @@ public class StripesPMI extends Configured implements Tool {
     // job1.setCombinerClass(MyReducer1.class);
     job1.setReducerClass(MyReducer1.class);
 
+    // Altiscale requirements
+    job1.getConfiguration().setInt("mapred.max.split.size", 1024 * 1024 * 32);
+    job1.getConfiguration().set("mapreduce.map.memory.mb", "3072");
+    job1.getConfiguration().set("mapreduce.map.java.opts", "-Xmx3072m");
+    job1.getConfiguration().set("mapreduce.reduce.memory.mb", "3072");
+    job1.getConfiguration().set("mapreduce.reduce.java.opts", "-Xmx3072m");
 
     long job1StartTime = System.currentTimeMillis();
     job1.waitForCompletion(true);
@@ -396,6 +409,13 @@ public class StripesPMI extends Configured implements Tool {
     // job2.setCombinerClass(MyCombiner2.class);
     job2.setReducerClass(MyReducer2.class);
 
+    // Altiscale requirements
+    job2.getConfiguration().setInt("mapred.max.split.size", 1024 * 1024 * 32);
+    job2.getConfiguration().set("mapreduce.map.memory.mb", "3072");
+    job2.getConfiguration().set("mapreduce.map.java.opts", "-Xmx3072m");
+    job2.getConfiguration().set("mapreduce.reduce.memory.mb", "3072");
+    job2.getConfiguration().set("mapreduce.reduce.java.opts", "-Xmx3072m");
+    
     // Delete the output directory if it exists already.
     Path outputDir = new Path(args.output);
     FileSystem.get(conf).delete(outputDir, true);
