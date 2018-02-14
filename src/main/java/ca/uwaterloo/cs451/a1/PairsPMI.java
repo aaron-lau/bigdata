@@ -161,7 +161,7 @@ public class PairsPMI extends Configured implements Tool {
         throws IOException, InterruptedException {
           String stringCountPair = value.toString();
 
-          String pairStr = stringCountPair.substring(stringCountPair.indexOf("(") + 1, stringCountPair.indexOf(")"));
+          String pairStr = stringCountPair.substring(stringCountPair.indexOf("(") + 1, stringCountPair.lastIndexOf(")"));
 
           float count = Float.parseFloat(stringCountPair.substring(stringCountPair.lastIndexOf(")") + 1).replaceAll("\\s+", ""));
 
