@@ -233,8 +233,8 @@ public class PairsPMI extends Configured implements Tool {
         reader = new BufferedReader(inStream2);
         String line = reader.readLine();
         while(line != null){
-          String pairStr = line.substring(line.indexOf("(") + 1, line.indexOf(")"));
-          float count = Float.parseFloat(line.substring(line.indexOf(")") + 1).replaceAll("\\s+", ""));
+          String pairStr = line.substring(line.indexOf("(") + 1, line.lastIndexOf(")"));
+          float count = Float.parseFloat(line.substring(line.lastIndexOf(")") + 1).replaceAll("\\s+", ""));
           String[] pair = pairStr.split(",");
           String A = pair[0].replaceAll("\\s+", "");
           String B = pair[1].replaceAll("\\s+", "");
