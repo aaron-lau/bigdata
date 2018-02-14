@@ -338,7 +338,7 @@ public class StripesPMI extends Configured implements Tool {
     lineCountJob.setOutputFormatClass(TextOutputFormat.class);
 
     lineCountJob.setMapperClass(LineCountMapper.class);
-    // lineCountJob.setCombinerClass(LineCountReducer.class);
+    lineCountJob.setCombinerClass(LineCountReducer.class);
     lineCountJob.setReducerClass(LineCountReducer.class);
 
     // Altiscale requirements
@@ -373,7 +373,7 @@ public class StripesPMI extends Configured implements Tool {
     job1.setOutputFormatClass(TextOutputFormat.class);
 
     job1.setMapperClass(MyMapper1.class);
-    // job1.setCombinerClass(MyReducer1.class);
+    job1.setCombinerClass(MyReducer1.class);
     job1.setReducerClass(MyReducer1.class);
 
     // Altiscale requirements
@@ -406,7 +406,7 @@ public class StripesPMI extends Configured implements Tool {
     job2.setOutputValueClass(Text.class);
 
     job2.setMapperClass(MyMapper2.class);
-    // job2.setCombinerClass(MyCombiner2.class);
+    job2.setCombinerClass(MyCombiner2.class);
     job2.setReducerClass(MyReducer2.class);
 
     // Altiscale requirements
@@ -415,7 +415,7 @@ public class StripesPMI extends Configured implements Tool {
     job2.getConfiguration().set("mapreduce.map.java.opts", "-Xmx3072m");
     job2.getConfiguration().set("mapreduce.reduce.memory.mb", "3072");
     job2.getConfiguration().set("mapreduce.reduce.java.opts", "-Xmx3072m");
-    
+
     // Delete the output directory if it exists already.
     Path outputDir = new Path(args.output);
     FileSystem.get(conf).delete(outputDir, true);

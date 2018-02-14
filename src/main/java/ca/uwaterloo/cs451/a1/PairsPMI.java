@@ -353,6 +353,7 @@ public class PairsPMI extends Configured implements Tool {
 
     lineCountJob.setMapperClass(LineCountMapper.class);
     lineCountJob.setReducerClass(LineCountReducer.class);
+    lineCountJob.setCombinerClass(LineCountReducer.class);
 
     // Altiscale requirements
     lineCountJob.getConfiguration().setInt("mapred.max.split.size", 1024 * 1024 * 32);
@@ -386,7 +387,7 @@ public class PairsPMI extends Configured implements Tool {
     job1.setOutputFormatClass(TextOutputFormat.class);
 
     job1.setMapperClass(MyMapper1.class);
-    // job1.setCombinerClass(MyReducer1.class);
+    job1.setCombinerClass(MyReducer1.class);
     job1.setReducerClass(MyReducer1.class);
     job1.setPartitionerClass(MyPartitioner1.class);
 
@@ -420,7 +421,7 @@ public class PairsPMI extends Configured implements Tool {
     job2.setOutputValueClass(PairOfFloatInt.class);
 
     job2.setMapperClass(MyMapper2.class);
-    // job2.setCombinerClass(MyCombiner2.class);
+    job2.setCombinerClass(MyCombiner2.class);
     job2.setReducerClass(MyReducer2.class);
     job2.setPartitionerClass(MyPartitioner2.class);
 
