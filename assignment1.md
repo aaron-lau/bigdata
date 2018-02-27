@@ -80,7 +80,7 @@ hockey	goaltender: (2.0803165, 136)
 hockey	nhl: (1.9864639, 940)
 
 # q8
-The following the the fair pairs with the highest PMI with the word 'hockey'
+The following the the fair pairs with the highest PMI with the word 'data'
 Their respective PMI is the first number in the second parenthesis
 Their respective cooccurrence is the second number in the second parenthesis
 data	storage: (1.9796829, 100)
