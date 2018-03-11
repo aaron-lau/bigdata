@@ -10,23 +10,6 @@ import java.util.StringTokenizer
 import scala.collection.JavaConverters._
 import org.apache.spark.sql.SparkSession
 
-// class Conf(args: Seq[String]) extends ScallopConf(args) with Tokenizer {
-//   // mainOptions = Seq(input, date, )
-//   val input = opt[String](descr = "input path", required = true)
-//   val date = opt[String](descr = "l_shipdate", required = true)
-//   val text = opt[Boolean](descr = "parquet", required = false)
-//   val parquet = opt[Boolean](descr = "parquet", required = false)
-//   verify()
-// }
-//
-// class MyPartitioner(numOfPar: Int) extends Partitioner {
-//   def numPartitions: Int = numOfPar
-//   def getPartition(key: Any): Int = {
-//     val k = key.asInstanceOf[(String, String)]
-//     ((k._1.hashCode() & Integer.MAX_VALUE) % numPartitions)
-//   }
-// }
-
 object Q2 extends Tokenizer {
   val log = Logger.getLogger(getClass().getName())
 
@@ -36,7 +19,7 @@ object Q2 extends Tokenizer {
     log.info("Input: " + args.input())
     log.info("Date: " + args.date())
 
-    val conf = new SparkConf().setAppName("Q1")
+    val conf = new SparkConf().setAppName("Q2")
     val sc = new SparkContext(conf)
     val shipdate = args.date()
     // val lineitemRDD =

@@ -13,7 +13,7 @@ import org.apache.spark.sql.SparkSession
 class Conf(args: Seq[String]) extends ScallopConf(args) with Tokenizer {
   // mainOptions = Seq(input, date, )
   val input = opt[String](descr = "input path", required = true)
-  val date = opt[String](descr = "l_shipdate", required = true)
+  val date = opt[String](descr = "l_shipdate", required = false)
   val text = opt[Boolean](descr = "parquet", required = false)
   val parquet = opt[Boolean](descr = "parquet", required = false)
   verify()
