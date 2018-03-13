@@ -49,9 +49,11 @@ object Q5 extends Tokenizer {
         })
         .reduceByKey(_ + _)
         .sortByKey(true)
+        .map(pair=> (pair._1._2, (pair._1._1, pair._2 )))
+        .sortByKey(true)
 
       lineitemRDD.collect().foreach{pair =>
-        println("(" + pair._1._1 + "," + pair._1._2 + "," + pair._2 + ")")
+        println("(" + pair._1 + "," + pair._2._1 + "," + pair._2._2 + ")")
       }
     }
     else if (args.parquet()){
@@ -90,10 +92,11 @@ object Q5 extends Tokenizer {
         })
         .reduceByKey(_ + _)
         .sortByKey(true)
-
+        .map(pair=> (pair._1._2, (pair._1._1, pair._2 )))
+        .sortByKey(true)
 
       lineitemRDDFiltered.collect().foreach { pair =>
-        println("(" + pair._1._1 + "," + pair._1._2 + "," + pair._2 + ")")
+        println("(" + pair._1 + "," + pair._2._1 + "," + pair._2._2 + ")")
       }
     }
   }
