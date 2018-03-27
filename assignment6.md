@@ -39,9 +39,3 @@ spam.train.all.txt:
 8. 1-ROCA%: 13.23
 9. 1-ROCA%: 13.91
 10. 1-ROCA%: 18.50
-
-spark-submit --driver-memory 2g --class ca.uwaterloo.cs451.a6.TrainSpamClassifier  target/assignments-1.0.jar --input /shared/uwaterloo/cs451/data/spam.train.britney.txt --model cs451-lintool-a6-model-britney --shuffle
-
-spark-submit --driver-memory 2g --class ca.uwaterloo.cs451.a6.ApplySpamClassifier target/assignments-1.0.jar --input /shared/uwaterloo/cs451/data/spam.test.qrels.txt --output cs451-lintool-a6-test-britney --model cs451-lintool-a6-model-britney
-
-./spam_eval_hdfs.sh cs451-lintool-a6-test-britney
