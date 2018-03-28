@@ -4,3 +4,6 @@ target/
 wc/
 data/
 cs451-lintool-*/
+taxi-data/
+TPC-*/
+spam.*.txt
