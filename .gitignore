@@ -6,4 +6,5 @@ data/
 cs451-lintool-*/
 taxi-data/
 TPC-*/
-spam.*.txt
+ispam.*.txt
+output-*/
